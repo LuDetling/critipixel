@@ -44,6 +44,9 @@ De même pour la version de PHP que vous pouvez spécifier dans un fichier `.php
 #### Supprimer la base de données
 ```bash
 symfony console doctrine:database:drop --force --if-exists
+symfony console doctrine:database:create
+symfony console doctrine:migrations:migrate -n
+symfony console doctrine:fixtures:load -n --purge-with-truncate
 ```
 
 #### Créer la base de données

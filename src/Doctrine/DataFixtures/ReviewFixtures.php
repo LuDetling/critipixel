@@ -23,17 +23,29 @@ final class ReviewFixtures extends Fixture implements DependentFixtureInterface
         $users = $manager->getRepository(User::class)->findAll();
         $videoGames = $manager->getRepository(VideoGame::class)->findAll();
 
-        $reviews = array_fill_callback(
-            0,
-            300,
-            fn(int $index): Review => (new Review)
-                ->setRating(($index % 5) + 1)
-                ->setComment($this->faker->paragraphs(6, true))
-                ->setUser($users[array_rand($users)])
-                ->setVideoGame($videoGames[array_rand($videoGames)])
-        );
+        foreach ($videoGames as $videoGame){
+            $total = 0;
+            $nbReview = rand(1, 3);
+            for($i = 0; $i < $nbReview; $i++){
+                $rating = rand(1, 5);
+                $total += $rating;
+                $review = new Review();
+                match ($rating) {
+                    1 => $videoGame->getNumberOfRatingsPerValue()->increaseOne(),
+                    2 => $videoGame->getNumberOfRatingsPerValue()->increaseTwo(),
+                    3 => $videoGame->getNumberOfRatingsPerValue()->increaseThree(),
+                    4 => $videoGame->getNumberOfRatingsPerValue()->increaseFour(),
+                    5 => $videoGame->getNumberOfRatingsPerValue()->increaseFive(),
+                };
+                $review->setRating($rating);
+                $review->setComment($this->faker->paragraphs(6, true));
+                $review->setUser($users[array_rand($users)]);
+                $review->setVideoGame($videoGame);
+                $manager->persist($review);
+            }
+            $videoGame->setRating($total / $nbReview);
+        }
 
-        array_walk($reviews, [$manager, 'persist']);
 
         $manager->flush();
     }

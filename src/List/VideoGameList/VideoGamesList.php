@@ -33,6 +33,10 @@ final class VideoGamesList implements Countable, IteratorAggregate
 
     private string $route;
 
+    /**
+     * Summary of routeParameters
+     * @var array<string, mixed>
+     */
     private array $routeParameters;
 
     public function __construct(
