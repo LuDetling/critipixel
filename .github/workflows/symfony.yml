@@ -23,8 +23,6 @@ jobs:
       with:
         php-version: '8.2'
     - uses: actions/checkout@v4
-    - name: Copy .env.test.local
-      run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -46,4 +44,3 @@ jobs:
       run: php bin/phpunit
     - name: Execute phpStan
       run: php vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G 
-
