@@ -46,4 +46,3 @@ jobs:
       run: php bin/phpunit
     - name: Execute phpStan
       run: php vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G 
-
