@@ -3,17 +3,31 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: OC test on branch GA
+name: OC test
 
 on:
   push:
-    branches: [ "GA" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
 
 jobs:
   symfony-tests:
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: criti-pixel
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d criti-pixel"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     runs-on: ubuntu-latest
     steps:
     #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
