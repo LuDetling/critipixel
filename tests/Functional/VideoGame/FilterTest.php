@@ -17,8 +17,8 @@ final class FilterTest extends FunctionalTestCase
     {
         return [
             [],
-            [17],
-            [17, 18],
+            [1],
+            [1, 2],
         ];
     }
     public function testShouldListTenVideoGames(): void

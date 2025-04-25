@@ -16,17 +16,18 @@ final class ReviewFixtures extends Fixture implements DependentFixtureInterface
 
     public function __construct(
         private readonly Generator $faker,
-    ){}
+    ) {
+    }
     public function load(ObjectManager $manager): void
     {
-
         $users = $manager->getRepository(User::class)->findAll();
+        unset($users[0]);
         $videoGames = $manager->getRepository(VideoGame::class)->findAll();
 
-        foreach ($videoGames as $videoGame){
+        foreach ($videoGames as $videoGame) {
             $total = 0;
             $nbReview = rand(1, 3);
-            for($i = 0; $i < $nbReview; $i++){
+            for ($i = 0; $i < $nbReview; $i++) {
                 $rating = rand(1, 5);
                 $total += $rating;
                 $review = new Review();

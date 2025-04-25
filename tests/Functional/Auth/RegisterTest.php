@@ -10,14 +10,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class RegisterTest extends FunctionalTestCase
 {
-    public function testThatRegistrationShouldSucceeded(string $email = 'user+0@email.com'): void
+    public function testThatRegistrationShouldSucceeded(string $email = 'user@email.com'): void
     {
         $this->get('/auth/register');
-
         $this->client->submitForm('S\'inscrire', self::getFormData());
-
+                
         self::assertResponseRedirects('/auth/login');
-
+        
         $user = $this->getEntityManager()->getRepository(User::class)->findOneBy( ['email' => $email]);
 
         $userPasswordHasher = $this->service(UserPasswordHasherInterface::class);

@@ -11,6 +11,12 @@ final class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $lucas = (new User())
+            ->setEmail('lucas@gmail.com')
+            ->setPlainPassword('password')
+            ->setUsername('lucas');
+        $manager->persist($lucas);
+        
         for ($i = 0; $i < 10; $i++) {
             $users = (new User)
                 ->setEmail(sprintf('user+%d@email.com', $i))

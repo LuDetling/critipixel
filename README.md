@@ -47,6 +47,11 @@ symfony console doctrine:database:drop --force --if-exists
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate -n
 symfony console doctrine:fixtures:load -n --purge-with-truncate
+
+symfony console doctrine:database:drop --force --if-exists --env=test
+symfony console doctrine:database:create --env=test
+symfony console doctrine:migrations:migrate -n --env=test
+symfony console doctrine:fixtures:load -n --purge-with-truncate --env=test
 ```
 
 #### Créer la base de données
@@ -64,7 +69,7 @@ symfony console doctrine:migrations:migrate -n
 symfony console doctrine:fixtures:load -n --purge-with-truncate
 ```
 
-*Note : Vous pouvez exécuter ces commandes avec l'option `--env=test` pour les exécuter dans l'environnement de test.*
+*Note : Vous pouvez exécuter ces commandes avec l'option `--env=test=test` pour les exécuter dans l'environnement de test.*
 
 ### SASS
 
