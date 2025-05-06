@@ -22,7 +22,7 @@ class CountRatingPerValueTest extends TestCase
     }
 
     /**
-     * @return iterable<array{VideoGame, ?int}>
+     * @return iterable<array{VideoGame, NumberOfRatingPerValue}>
      */
     public function noteProvider(): iterable
     {
@@ -33,7 +33,7 @@ class CountRatingPerValueTest extends TestCase
             ],
             [
                 self::newVideoGame(1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5),
-                self::noteByUsers(1, 2, 3, 4, 2)
+                self::noteByUsers(one: 1, two: 2, three: 3, four: 4, five: 2)
             ],
             [
                 self::newVideoGame(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
